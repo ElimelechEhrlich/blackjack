@@ -1,6 +1,5 @@
+from core.game_logik import run_full_game
 from core.deck import *
-from core.player_io import *
-from core.game_logik import *
 
 
 if __name__ == "__main__":
