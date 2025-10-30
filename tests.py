@@ -15,7 +15,9 @@ def build_standard_deck() -> list[dict]:
     for rank in ranks:
         for suite in suites:
             deck.append(create_card(rank, suite))
+    print (len(deck))
     return deck
+print (build_standard_deck())
 
 def shuffle_by_suit(deck: list[dict], swaps: int = 5000) -> list[dict]:
     for run in range(swaps):
@@ -38,6 +40,20 @@ def calculate_hand_value(hand: list[dict]) -> int:
             elif i['rank'] == 'A':
                 hand_value += 1       
     return hand_value
+hand = build_standard_deck()
+print (calculate_hand_value(hand))
 
 
+def deal_two_each(deck: list[dict], player: dict, dealer: dict) -> None:
+    player = {"hand": [] }
+    dealer = {"hand": [] }
+    player['hand'].append(deck.pop(0))
+    player['hand'].append(deck.pop(0))
+    dealer['hand'].append(deck.pop(0))
+    dealer['hand'].append(deck.pop(0))
+    print (player)
+    return player, dealer
+
+# deck = shuffle_by_suit(build_standard_deck())
+# print(deal_two_each(deck))
 
