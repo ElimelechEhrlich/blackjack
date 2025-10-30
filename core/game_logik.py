@@ -1,3 +1,6 @@
+from deck import *
+from player_io import *
+
 def calculate_hand_value(hand: list[dict]) -> int:
     hand_value = 0
     for i in hand:
@@ -24,11 +27,40 @@ def deal_two_each(deck: list[dict], player: dict, dealer: dict) -> None:
     return 
 
 def dealer_play(deck: list[dict], dealer: dict) -> bool:
-    dealer.append(deck.pop(0))
-    dealer_hand_value = calculate_hand_value(dealer)
+    dealer_hand_value = 0
+    while dealer_hand_value > 17:
+        dealer.append(deck.pop(0))
+        dealer_hand_value = calculate_hand_value(dealer)
     if dealer_hand_value > 21:
         print ('Value greater than 21. dealer loses.')
         return False
     elif dealer_hand_value < 17:
-        print ('A value greater than 17 and less than 21. dealer wins the game.')
         return True
+    
+    
+def run_full_game(deck: list[dict], player: dict, dealer: dict) -> None:
+    deck = shuffle_by_suit(build_standard_deck())
+    player = player['hand']
+    dealer = dealer['hand']
+    deal_two_each(deck,player,dealer)
+    while player_hand_value < 21:
+        choice = ask_player_action()
+        if choice == 'H':
+            player.append(deck.pop(0))
+            player_hand_value = calculate_hand_value(player)
+        if choice == 'S':
+            if dealer_play(deck,player,dealer):
+                player_hand_value = calculate_hand_value(player)
+                dealer_hand_value = calculate_hand_value(dealer)
+                if player_hand_value > dealer_hand_value: 
+                    print ('player winn')
+                elif player_hand_value < dealer_hand_value: 
+                    print ('dealer winn')
+                else:
+                    print ('draw!')
+    return False
+        
+        
+        
+
+
