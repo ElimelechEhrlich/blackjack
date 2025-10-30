@@ -22,3 +22,13 @@ def deal_two_each(deck: list[dict], player: dict, dealer: dict) -> None:
     print (f'player: {player_hand_value}\ndealer: {dealer_hand_value}')
     print (len(deck))
     return 
+
+def dealer_play(deck: list[dict], dealer: dict) -> bool:
+    dealer.append(deck.pop(0))
+    dealer_hand_value = calculate_hand_value(dealer)
+    if dealer_hand_value > 21:
+        print ('Value greater than 21. dealer loses.')
+        return False
+    elif dealer_hand_value < 17:
+        print ('A value greater than 17 and less than 21. dealer wins the game.')
+        return True
