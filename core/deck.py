@@ -26,18 +26,7 @@ def shuffle_by_suit(deck: list[dict], swaps: int = 5000) -> list[dict]:
         deck[index1], deck[index2] = deck[index2], deck[index1]
     return deck
 
-def calculate_hand_value(hand: list[dict]) -> int:
-    hand_value = 0
-    for i in hand:
-        try:
-            i['rank'] = int(i['rank'])
-            hand_value += i['rank']
-        except:
-            if i['rank'] != 'A':
-                hand_value += 10
-            elif i['rank'] == 'A':
-                hand_value += 1       
-    return hand_value
+
 
 
 
